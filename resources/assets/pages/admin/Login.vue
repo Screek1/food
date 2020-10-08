@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div class="form-group">
+        <div class="form-group p-4">
             <label for="login">Login:</label>
             <input type="text" id="login" name="login" class="form-control" v-model="form.email">
             <label for="login">Password:</label>
@@ -23,8 +23,7 @@
     },
     methods: {
       login() {
-        this.$api.admin.authorization(this.form).then(res => {
-          console.log('All right');
+        this.$api.auth.authorization(this.form).then(res => {
           this.$router.push({ name: 'admin-products' });
         })
       }

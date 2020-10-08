@@ -3,7 +3,6 @@ import Default from './modules/default'
 export default function routes(router) {
   const requireModules = require.context('./modules', false, /\.js$/);
   requireModules.keys().forEach(fileName => {
-    console.log(requireModules(fileName).default)
     if (fileName === './default.js') {
       return;
     }

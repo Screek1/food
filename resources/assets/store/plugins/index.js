@@ -16,7 +16,9 @@ const mutations = [];
  */
 const paths = [
 	'token',
-	'loggedIn'
+	'loggedIn',
+	'menu.savedMenu',
+	'menu.typeMenu'
 ];
 
 /**

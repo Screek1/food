@@ -8,6 +8,11 @@ export default function Default (router) {
         if (to.meta.auth === true && !store.getters.getToken) {
             return next({ path: '/admin/login' });
         }
+
+        // if (store.getters.getToken && store.getters.getLoggedIn) {
+        //     return next({name: 'admin-products'})
+        // }
+
         return next();
     });
 

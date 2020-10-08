@@ -1,5 +1,5 @@
-const AdminLogin = () => import(/* webpackChunkName: 'AdminLogin' */ '@pages/admin/Login')
-const AdminProducts = () => import(/* webpackChunkName: 'AdminProducts' */ '@pages/admin/Products')
+const AdminLogin = () => import(/* webpackChunkName: 'admin-login' */ '@pages/admin/Login')
+const AdminProducts = () => import(/* webpackChunkName: 'admin-products' */ '@pages/admin/Products')
 
 export default [
   {
@@ -11,7 +11,7 @@ export default [
     component: AdminLogin,
     name: 'admin-login',
     meta: {
-      title: 'Login to admin panel'
+      title: 'Панель Администратора'
     }
   },
   {
@@ -20,7 +20,7 @@ export default [
     name: 'admin-products',
     meta: {
       auth: true,
-      title: 'Products'
+      title: 'Меню'
     }
   }
 ];

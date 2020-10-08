@@ -1,4 +1,4 @@
-const Home = () => import(/* webpackChunkName: 'Home' */ '@pages/Home')
+const Home = () => import(/* webpackChunkName: 'home' */ '@pages/Home')
 
 export default [
   {

@@ -1,5 +1,4 @@
 const path                = require('path');
-const webpack             = require('webpack');
 
 module.exports = {
   resolve: {
@@ -12,6 +11,7 @@ module.exports = {
       '@api': path.resolve(__dirname, 'resources/assets/api'),
       '@utils': path.resolve(__dirname, 'resources/assets/utils'),
       '@helpers': path.resolve(__dirname, 'resources/assets/helpers'),
+      '@components': path.resolve(__dirname, 'resources/assets/components'),
     },
   },
 };

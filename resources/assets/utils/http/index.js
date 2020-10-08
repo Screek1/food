@@ -1,8 +1,9 @@
-import axios                from 'axios'
-import Vue                  from 'vue'
+import axios from 'axios'
+import Vue from 'vue'
+import router from '@router'
 
-import config               from '@config'
-import store                from '@store'
+import config from '@config'
+import store from '@store'
 
 const http = axios.create({
     baseURL: config.http.url,
@@ -10,7 +11,8 @@ const http = axios.create({
 });
 
 /**
- * Sets the X-CSRFToken header for ajax non-GET request to make CSRF protection easy.
+ * Sets the X-CSRFToken header for ajax non-GET request to make CSRF protection
+ * easy.
  */
 if (Laravel.csrf_token) {
     http.defaults.headers.common['X-CSRF-TOKEN'] = Laravel.csrf_token;
@@ -40,17 +42,15 @@ const onSuccess = (response) =>
 
 const onError = (error) =>
 {
+    console.log(error.response, 'error response')
     if (error.response) {
         switch (error.response.status) {
             case 401:
-                break;
+                return this.$route.path({name: 'admin-login'})
             default:
                 break;
         }
     }
-
-    store.dispatch('loading/setLoading', false);
-
     return Promise.reject(error);
 };
 

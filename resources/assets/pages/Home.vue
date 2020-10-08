@@ -1,17 +1,17 @@
 <template>
     <div class="wrapper">
-        <div class="container">
-            Hello world
-        </div>
+        <Menu/>
     </div>
 </template>
 
 <script>
+  import Menu from '@components/menu/Menu'
   export default {
     name: 'Home',
+    components: { Menu },
     data() {
       return {
-        home: 1
+        name: ''
       }
     },
   }
