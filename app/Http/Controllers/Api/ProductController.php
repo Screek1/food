@@ -10,14 +10,6 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     /**
-     * ProductController constructor.
-     */
-    public function __construct()
-    {
-        $this->middleware('auth:api', ['except' => ['index']]);
-    }
-
-    /**
      * @return \Illuminate\Http\JsonResponse
      */
     public function index()

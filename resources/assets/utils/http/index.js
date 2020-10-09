@@ -1,5 +1,4 @@
 import axios from 'axios'
-import Vue from 'vue'
 import router from '@router'
 
 import config from '@config'
@@ -42,13 +41,19 @@ const onSuccess = (response) =>
 
 const onError = (error) =>
 {
-    console.log(error.response, 'error response')
     if (error.response) {
-        switch (error.response.status) {
-            case 401:
-                return this.$route.path({name: 'admin-login'})
-            default:
-                break;
+        if (error.response.status === 401) {
+            if (error.response.data.message === 'Token has expired' ) {
+                let lastRequest = error.config;
+                store.dispatch('setToken', error.response.data.new_token);
+                lastRequest.headers.Authorization = `Bearer ${error.response.data.new_token}`;
+                return http(lastRequest);
+            }
+        } else {
+            if (error.response.config.name !== 'admin-login') {
+                store.dispatch('setTokenAndLoggedIn', null);
+                router.push({ name: 'admin-login' });
+            }
         }
     }
     return Promise.reject(error);

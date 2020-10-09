@@ -7,7 +7,6 @@ const getters = {
     return state.products;
   },
   getProductsForBreakfast(state) {
-    console.log(state.products, 'products')
     return state.products.filter(product => product.meal.find(item => item.value === 'breakfast'))
   },
   getProductsForDinner(state) {

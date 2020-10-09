@@ -1,8 +1,8 @@
 export default {
 	getToken(state) {
-		return state.token
+		return state.token;
 	},
 	getLoggedIn(state) {
-		return state.loggedIn
+		return state.loggedIn;
 	},
 };

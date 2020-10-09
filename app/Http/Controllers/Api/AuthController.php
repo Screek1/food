@@ -20,7 +20,6 @@ class AuthController extends Controller
      */
     public function __construct(JWTAuth $JWTAuth)
     {
-        $this->middleware('auth:api', ['except' => ['login']]);
         $this->JWTAuth = $JWTAuth;
     }
 
@@ -62,16 +61,6 @@ class AuthController extends Controller
         auth()->logout();
 
         return response()->json(['message' => 'Successfully logged out']);
-    }
-
-    /**
-     * Refresh a token.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function refresh()
-    {
-        return $this->respondWithToken(auth()->refresh());
     }
 
     /**

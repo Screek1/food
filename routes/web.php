@@ -14,5 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/menu/{key}', [HomeController::class, 'index'])->name('menu.client');
 Route::get('/{any}', [HomeController::class, 'index'])->where(['any' => '.*']);
 

@@ -49,7 +49,7 @@
                     label="">
             </el-table-column>
         </el-table>
-        <table>
+        <table v-if="showAddNewProduct">
             <tr>
                 <td>
                     <multiselect v-model="product"
@@ -102,6 +102,10 @@
       index: {
         type: String,
         default: ''
+      },
+      showAddNewProduct: {
+        type: Boolean,
+        default: true
       }
     },
     data() {
@@ -156,6 +160,7 @@
           carbohydrates: null,
           portion: null,
         };
+        this.$toast.success("Новый продукт добавлен");
       },
       getSummaries(param) {
         const { columns, data } = param;

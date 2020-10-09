@@ -87,25 +87,23 @@
     name: 'Products',
     components: { NewProduct },
     mounted() {
-      let menu = this.$api.admin.getProducts();
-      this.$store.dispatch('product/setProducts', menu)
+      this.$api.product.getProducts();
     },
     computed: {
       ...mapGetters({
         products: 'product/getProducts',
-      }),
-      updateMenu() {
-        return true;
-      }
+      })
     },
     methods: {
       deleteProduct(id) {
         this.$api.admin.destroyProduct(id).then(result => {
           this.$store.dispatch('product/deleteProduct', id)
+          this.$toast.success("Продукт удален");
         });
       },
       saveMenu() {
         this.$store.dispatch('menu/saveMenu', this.products)
+        this.$toast.success("Меню сохранено");
       },
       logout() {
         this.$api.auth.logout().then(result => {

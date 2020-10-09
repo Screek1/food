@@ -3,7 +3,7 @@
         <div class="container">
             <div class="buttons d-flex justify-content-around p-3">
                 <button class="btn btn-primary" @click="saveMenu">Сохранить</button>
-                <button class="btn btn-secondary" @click.prevent="copyLinkToMenu">Поделится</button>
+                <button class="btn btn-secondary" @click="createMenu">Поделится</button>
             </div>
             <div>
                 <multiselect v-model="typeMenu"
@@ -57,9 +57,7 @@
       }
     },
     mounted() {
-      this.$api.admin.getProducts().then(result => {
-        this.$store.dispatch('product/setProducts', result.data.products)
-      });
+      this.$api.product.getProducts();
     },
     computed: {
       ...mapGetters({
@@ -85,17 +83,19 @@
           this.type = type.value;
         }
       },
-      copyLinkToMenu() {
-        try {
-          copyLink('123123')
-        } catch (e) {
-            alert('Error')
-        }
-      }
     },
     methods: {
       saveMenu() {
         this.$store.dispatch('menu/saveMenu', this.menu)
+      },
+      createMenu() {
+        this.$api.menu.createMenu(this.type, this.menu).then(result => {
+          this.$clipboard(result.data.link);
+          this.$store.dispatch('menu/saveMenu', {});
+          this.$toast.success("Ссылка на меню скопированна");
+        }).catch(error => {
+          this.$toast.error("Что-то пошло не так");
+        })
       }
     },
     filters: {
