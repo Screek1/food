@@ -1,5 +1,6 @@
 <template>
     <div class="container">
+        <div class="title">{{ this.menuName }}</div>
         <div class="m-4" v-for="(meal, index) in menu">
             <h4>{{ index | menuName }}</h4>
             <MealBlock :show-add-new-product="false" :menu="meal" :index="index"/>
@@ -16,12 +17,14 @@
     },
     data() {
       return {
+        menuName: '',
         menu: []
       }
     },
     mounted () {
       this.$api.menu.getMenu(this.$route.params.key).then(result => {
-        this.menu = result.data.menu
+        this.menuName = result.data.menu.name
+        this.menu = JSON.parse(result.data.menu.value)
       });
     },
     filters: {
@@ -44,5 +47,9 @@
 </script>
 
 <style scoped>
-
+    .title {
+        text-align: center;
+        font-size: 30px;
+        font-weight: bold;
+    }
 </style>

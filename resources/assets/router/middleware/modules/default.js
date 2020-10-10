@@ -4,15 +4,15 @@ import { setTitle } from '@helpers/documentTitle';
 
 export default function Default (router) {
     router.beforeEach((to, from, next) => {
-        setTitle(to);
         if (to.meta.auth === true && !store.getters.getToken) {
-            return next({ path: '/admin/login' });
+            return next({ name: 'admin-login' });
         }
 
-        // if (store.getters.getToken && store.getters.getLoggedIn) {
-        //     return next({name: 'admin-products'})
-        // }
+        if (to.name === 'admin-login' && store.getters.getToken && store.getters.getLoggedIn) {
+            return next({name: 'admin-products'})
+        }
 
+        setTitle(to);
         return next();
     });
 

@@ -5,8 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Menu;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
 class MenuController extends Controller
 {
@@ -17,7 +15,7 @@ class MenuController extends Controller
      */
     public function index(Request $request) {
          $menu = Menu::where('key', $request->key)->first();
-         return response()->json(['menu' => json_decode($menu->menu)]);
+         return response()->json(['menu' => $menu]);
     }
 
     /**
@@ -27,8 +25,9 @@ class MenuController extends Controller
      */
     public function createMenu(Request $request) {
         $menu = Menu::create([
+            'name' => $request->name,
             'type_menu' => $request->type,
-            'menu' => $request->menu
+            'value' => $request->menu
         ]);
         $link = route('menu.client', $menu->key);
         return response()->json(['link' => $link]);

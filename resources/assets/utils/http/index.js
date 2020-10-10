@@ -42,19 +42,22 @@ const onSuccess = (response) =>
 const onError = (error) =>
 {
     if (error.response) {
-        if (error.response.status === 401) {
-            if (error.response.data.message === 'Token has expired' ) {
-                let lastRequest = error.config;
-                store.dispatch('setToken', error.response.data.new_token);
-                lastRequest.headers.Authorization = `Bearer ${error.response.data.new_token}`;
-                return http(lastRequest);
-            }
-        } else {
-            if (error.response.config.name !== 'admin-login') {
-                store.dispatch('setTokenAndLoggedIn', null);
-                router.push({ name: 'admin-login' });
-            }
+        switch (error.response.status) {
+            case 401:
+                if (error.response.data.message === 'Token has expired' ) {
+                    let lastRequest = error.config;
+                    store.dispatch('setToken', error.response.data.new_token);
+                    lastRequest.headers.Authorization = `Bearer ${error.response.data.new_token}`;
+                    return http(lastRequest);
+                } else {
+                    if (error.response.config.name !== 'admin-login') {
+                        store.dispatch('setTokenAndLoggedIn', null);
+                        router.push({ name: 'admin-login' });
+                    }
+                    break;
+                }
         }
+
     }
     return Promise.reject(error);
 };

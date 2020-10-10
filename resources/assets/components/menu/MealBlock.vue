@@ -9,7 +9,7 @@
             <el-table-column
                     prop="product.name"
                     label="Название"
-                    width="250">
+                    width="300">
             </el-table-column>
             <el-table-column
                     prop="calories"
@@ -46,7 +46,8 @@
             </el-table-column>
             <el-table-column
                     prop=""
-                    label="">
+                    label=""
+                    width="10">
             </el-table-column>
         </el-table>
         <table v-if="showAddNewProduct">
@@ -61,25 +62,25 @@
                                  deselect-label=""
                                  :allow-empty="false"
                                  :close-on-select="true"
-                                 style="width: 230px"
+                                 style="width: 280px"
                     />
                 </td>
-                <td style="width: 17%">
+                <td style="width: 16%">
                     {{ newProduct.calories | count(newProduct) }}
                 </td>
-                <td style="width: 13%">
+                <td style="width: 14%">
                     {{ newProduct.squirrels | count(newProduct) }}
                 </td>
-                <td style="width: 12%">
+                <td style="width: 15%">
                     {{ newProduct.fats | count(newProduct) }}
                 </td>
-                <td style="width: 11%">
+                <td style="width: 12%">
                     {{ newProduct.carbohydrates | count(newProduct) }}
                 </td>
-                <td style="width: 13%">
+                <td style="width: 10%">
                     <input type="number" class="input-group" v-model="newProduct.portion">
                 </td>
-                <td>
+                <td style="width: 7%">
                     <button class="btn btn-success" @click="addNewProduct">+</button>
                 </td>
             </tr>
@@ -182,7 +183,7 @@
               } else {
                 return prev;
               }
-            }, 0).toFixed(0);
+            }, 0).toFixed(2);
           } else {
             sums[index] = 'N/A';
           }
@@ -193,7 +194,7 @@
     },
     filters: {
       count(int, item) {
-        return ((int / 100) * item.portion).toFixed(0);
+        return ((int / 100) * item.portion).toFixed(2);
       }
     }
   }

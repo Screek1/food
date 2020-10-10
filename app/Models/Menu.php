@@ -12,8 +12,9 @@ class Menu extends Model
 
     protected $fillable = [
         'key',
+        'name',
         'type_menu',
-        'menu'
+        'value'
     ];
 
     static public function boot() {

@@ -18,7 +18,8 @@ const paths = [
 	'token',
 	'loggedIn',
 	'menu.savedMenu',
-	'menu.typeMenu'
+	'menu.typeMenu',
+	'menu.savedMenuName'
 ];
 
 /**

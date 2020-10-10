@@ -2,6 +2,7 @@
     <div class="wrapper">
         <div class="container">
             <div class="buttons d-flex justify-content-around p-3">
+                <input v-model="computedMenuName" type="text" class="input-group name-input" placeholder="Введите Имя">
                 <button class="btn btn-primary" @click="saveMenu">Сохранить</button>
                 <button class="btn btn-secondary" @click="createMenu">Поделится</button>
             </div>
@@ -49,6 +50,7 @@
     data() {
       return {
         type: null,
+        menuName: '',
         menu: {},
         options: [
           { name: '4-х разовое питание', value: 4 },
@@ -62,7 +64,17 @@
     computed: {
       ...mapGetters({
         savedMenu: 'menu/getSavedMenu',
+        savedMenuName: 'menu/getSavedMenuName',
       }),
+      computedMenuName: {
+        get: function () {
+          return this.menuName = (this.savedMenuName) ? this.savedMenuName : '';
+
+        },
+        set: function (value) {
+          return this.menuName = value;
+        }
+      },
       typeMenu: {
         get: function () {
           return this.options.find(option => option.value === this.type);
@@ -86,12 +98,12 @@
     },
     methods: {
       saveMenu() {
-        this.$store.dispatch('menu/saveMenu', this.menu)
+        this.$store.dispatch('menu/saveMenu', { value: this.menu, name: this.menuName })
       },
       createMenu() {
-        this.$api.menu.createMenu(this.type, this.menu).then(result => {
+        this.$api.menu.createMenu(this.type, this.menu, this.menuName).then(result => {
           this.$clipboard(result.data.link);
-          this.$store.dispatch('menu/saveMenu', {});
+          this.$store.dispatch('menu/resetMenu');
           this.$toast.success("Ссылка на меню скопированна");
         }).catch(error => {
           this.$toast.error("Что-то пошло не так");
@@ -118,6 +130,9 @@
 </script>
 
 <style scoped>
+    .name-input {
+        width: 300px;
+    }
 
 </style>
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>

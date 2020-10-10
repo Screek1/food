@@ -18,7 +18,8 @@
                         >
                             <el-table-column
                                     prop="name"
-                                    label="Название">
+                                    label="Название"
+                                    width="200px">
                             </el-table-column>
                             <el-table-column
                                     prop="calories"
@@ -54,7 +55,8 @@
                             </el-table-column>
                             <el-table-column
                                     prop="meal"
-                                    label="Подходит для">
+                                    label="Подходит для"
+                                    width="200px">
                                 <template v-slot="{row}">
                                         <span v-for="item in row.meal">
                                             {{ item.name + 'а'}}
@@ -113,30 +115,13 @@
     },
     filters: {
       count(int, item) {
-        return ((int / 100) * item.portion).toFixed(0);
+        return ((int / 100) * item.portion).toFixed(2);
       }
     }
   }
 </script>
 
 <style scoped>
-    table {
-        width: 100%;
-    }
-    thead:first-child {
-        width: 40%;
-    }
-    tr:first-child {
-        width: 40%;
-    }
-    td {
-        padding: 3px;
-        width: 10%;
-    }
-    th {
-        padding: 3px;
-        width: 10%;
-    }
     .sidebar {
         padding: 20px;
     }
