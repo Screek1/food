@@ -58,7 +58,10 @@
       }),
       computedMenuName: {
         get: function () {
-          return this.menuName = (this.savedMenuName) ? this.savedMenuName : '';
+          if (this.isFirstLoad) {
+            this.menuName = (this.savedMenuName) ? this.savedMenuName : '';
+          }
+          return this.menuName;
 
         },
         set: function (value) {
@@ -102,6 +105,7 @@
           this.$clipboard(result.data.link);
           this.$store.dispatch('menu/resetMenu');
           this.$toast.success("Ссылка на меню скопированна");
+          this.menuName = '';
         }).catch(error => {
           this.$toast.error("Что-то пошло не так");
         })
