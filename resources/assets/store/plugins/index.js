@@ -19,7 +19,8 @@ const paths = [
 	'loggedIn',
 	'menu.savedMenu',
 	'menu.typeMenu',
-	'menu.savedMenuName'
+	'menu.savedMenuName',
+	'menu.savedMenuType'
 ];
 
 /**

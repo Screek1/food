@@ -1,6 +1,6 @@
 const state = {
-  typeMenu: null,
   savedMenuName: '',
+  savedMenuType: null,
   savedMenu: {}
 };
 
@@ -13,15 +13,15 @@ const getters = {
   },
   getSavedMenuName(state) {
     return state.savedMenuName;
+  },
+  getSavedMenuType(state) {
+    return state.savedMenuType;
   }
 };
 
 const actions = {
   saveMenu({ commit }, menu) {
     commit('saveMenu', menu);
-  },
-  setTypeMenu({ commit }, menu) {
-    commit('setTypeMenu', menu);
   },
   resetMenu({ commit }) {
     commit('resetMenu')
@@ -32,13 +32,12 @@ const mutations = {
   saveMenu(state, menu) {
     state.savedMenu = menu.value;
     state.savedMenuName = menu.name;
-  },
-  setTypeMenu(state, type) {
-    state.typeMenu = type;
+    state.savedMenuType = menu.type;
   },
   resetMenu (state) {
     state.savedMenu = {};
     state.savedMenuName = '';
+    state.savedMenuType = null;
   }
 };
 
