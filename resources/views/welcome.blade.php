@@ -14,7 +14,8 @@
 
         <script>
           let Laravel = {
-            'csrf_token' : '{{ csrf_token() }}'
+            'csrf_token' : '{{ csrf_token() }}',
+            'url': '{{ config('app.url') }}'
           };
         </script>
         <script src="{{ mix('/js/app.js') }}"></script>

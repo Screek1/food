@@ -4,7 +4,7 @@ import moment from 'moment';
 let defaultConfig = {
 	appName: 'Food',
 	http: {
-		url: 'http://food.loc',
+		url: Laravel.url,
 		defaultRequest: {
 			headers: {
 				'X-Requested-With': 'XMLHttpRequest',
@@ -15,14 +15,6 @@ let defaultConfig = {
 			}
 		}
 	},
-};
-
-export const routeConfig = {
-	filter: 'Filter',
-	board: 'board',
-	deadline: 'Deadline',
-	deadlineDay: 'day',
-	deadlineWeek: 'week',
 };
 
 export default defaultConfig;
